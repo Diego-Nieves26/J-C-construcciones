@@ -71,6 +71,8 @@ export default function AccessRequestPage() {
   }, []);
 
   const getAccessRequestData = () => {
+  console.log("Hecho")
+    
     instance
       .get("/pre-users/")
       .then(({ data }) => setAccessRequestData(data.preUsers))
