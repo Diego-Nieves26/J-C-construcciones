@@ -43,7 +43,7 @@ const login = catchAsync(async (req, res, next) => {
   }
 
   const isPasswordaValid = await bcrypt.compare(password, user.password);
-  console.log(password, user.password);
+  console.log(isPasswordaValid);
 
   if (!isPasswordaValid) {
     return next(new AppError("Credenciales incorrectas", 404));
