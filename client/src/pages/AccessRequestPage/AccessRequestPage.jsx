@@ -73,9 +73,8 @@ export default function AccessRequestPage() {
   const getAccessRequestData = () => {
     instance
       .get("/pre-users/")
-      .then(({ data }) => {
-        console.log(data)
-        setAccessRequestData(data.preUsers)}
+      .then(({ data }) => 
+        setAccessRequestData(data.preUsers)
            )
       .catch((err) => {
         console.log(err.response.data);
