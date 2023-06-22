@@ -95,7 +95,7 @@ console.log(accessRequestData)
           </tr>
         </thead>
         <tbody>
-          {accessRequestData.length >= 0 ? (
+          {accessRequestData.length <= 0 ? (
             <p className="data-empty-message">Sin datos</p>
           ) : (
             accessRequestData.map((item) => (
