@@ -25,7 +25,7 @@ export default function LoginPage() {
 
   const _handleLogin = (e) => {
     toast("Cargando", normalToast);
-
+console.log(e)
     instance
       .post("/users/login", e)
       .then(({ data }) => {
