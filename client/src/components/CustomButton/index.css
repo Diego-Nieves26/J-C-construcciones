@@ -1,0 +1,19 @@
+.btn {
+  width: 100%;
+  gap: 0.5rem;
+  border-radius: 3rem;
+  background: var(--btn-bg);
+  color: var(--text-color-one);
+  cursor: pointer;
+  transition: all 300ms;
+  font-weight: 700;
+  font-size: var(--second-size);
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.btn:focus {
+  transform: scale(0.95);
+}

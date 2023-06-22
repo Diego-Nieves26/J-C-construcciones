@@ -1,0 +1,152 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+  border: none;
+}
+
+:root {
+  /* COLORS */
+  --first-color: #c05533;
+  --text-color-one: #ffffff;
+  --text-color-two: #525252;
+  --bg-color: #fff;
+  --btn-bg: linear-gradient(170.16deg, #ff7f56 25.43%, #ffab91 94.12%);
+
+  /* TEXT SIZE */
+  --first-size: 1.875rem;
+  --second-size: 1rem;
+  --third-size: 0.625rem;
+}
+
+/* CUSTOM SCROLL */
+::-webkit-scrollbar {
+  width: 0.5vw;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--first-color);
+  border-radius: 10px;
+}
+
+/* REUTILIZABLES */
+.limit-width {
+  margin: auto;
+  padding: 0 25px;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shadow {
+  -webkit-box-shadow: 5px 5px 5px -5px var(--text-color-two);
+  -moz-box-shadow: 5px 5px 5px -5px var(--text-color-two);
+  box-shadow: 5px 5px 5px -5px var(--text-color-two);
+}
+
+.data-empty-message {
+  text-align: center;
+  font-size: var(--first-size);
+  padding: 30px;
+  position: absolute;
+  left: 50%;
+}
+
+/* FORM LOGIN-REGISTER */
+.form-login-register {
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.form-login-register .input-conatiner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-login-register .input[type="email"],
+.form-login-register .input[type="password"],
+.form-login-register .input[type="text"],
+.form-login-register .input[type="number"] {
+  padding: 1rem 0.75rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  border-bottom: 2px solid var(--first-color);
+}
+
+.form-login-register .input[type="email"]:focus,
+.form-login-register .input[type="password"]:focus,
+.form-login-register .input[type="text"]:focus,
+.form-login-register .input[type="number"]:focus {
+  border: 2px solid var(--first-color);
+  border-radius: 0.5rem;
+}
+
+.form-login-register .error-message-inp {
+  color: red;
+  font-size: var(--third);
+}
+
+.form-login-register .span {
+  color: var(--text-color-two);
+}
+
+.form-login-register .span a {
+  color: var(--first-color);
+  text-decoration: underline;
+}
+
+/* TABLE */
+.table-one {
+  width: 100%;
+  border: 2px solid var(--first-color);
+  border-collapse: collapse;
+  margin-top: 2rem;
+  border-radius: 0.5rem;
+}
+
+.table-one thead {
+  border-bottom: 2px solid var(--first-color);
+  background-color: var(--first-color);
+}
+
+.table-one thead th {
+  font-size: var(--second-size);
+  color: var(--text-color-one);
+}
+
+.table-one tbody th {
+  font-size: var(--second-size);
+  color: var(--text-color-two);
+  padding: 10px 0;
+}
+
+@media (min-width: 1000px) {
+  .page-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .page-container > main {
+    width: calc(100% - 280px);
+  }
+}

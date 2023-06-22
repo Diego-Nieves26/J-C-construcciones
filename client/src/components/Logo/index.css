@@ -1,0 +1,12 @@
+.first-logo {
+  flex-direction: column;
+  font-size: var(--first-size);
+  font-weight: 700;
+  color: var(--text-color-two);
+  line-height: var(--first-size);
+}
+
+.first-logo > span {
+  font-size: calc(var(--first-size) + 10px);
+  color: var(--first-color);
+}

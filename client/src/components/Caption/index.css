@@ -1,0 +1,7 @@
+.caption {
+  font-size: var(--first-size);
+  padding: 5px 20px;
+  color: var(--text-color-one);
+  background-color: var(--first-color);
+  display: inline-block;
+}

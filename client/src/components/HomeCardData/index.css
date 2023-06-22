@@ -1,0 +1,23 @@
+.home-card-data {
+  width: 100%;
+  padding: 20px 15px;
+  border-radius: 10px;
+  color: var(--text-color-one);
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.home-card-data > p {
+  font-size: 17px;
+}
+
+.home-card-data > h3 {
+  font-size: 30px;
+}
+
+.home-card-data > span {
+  font-size: 13px;
+  font-weight: 400;
+}

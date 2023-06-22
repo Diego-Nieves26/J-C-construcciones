@@ -1,0 +1,5 @@
+.register-page {
+  flex-direction: column;
+  gap: 3rem;
+  padding: 3rem 25px;
+}

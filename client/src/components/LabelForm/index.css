@@ -1,0 +1,5 @@
+.label {
+  align-self: flex-start;
+  color: var(--first-color);
+  font-weight: 600;
+}

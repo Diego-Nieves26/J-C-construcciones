@@ -1,0 +1,22 @@
+.add-data-page {
+  padding: 2rem 20px;
+}
+
+.form-create-data {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  max-width: initial;
+  margin-top: 3rem;
+}
+
+@media (min-width: 768px) {
+  .form-create-data {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  .form-create-data {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
