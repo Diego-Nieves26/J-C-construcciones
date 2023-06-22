@@ -35,6 +35,7 @@ const createUser = catchAsync(async (req, res, next) => {
 
 const login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
+  console.log(email, password)
 
   const user = await User.findOne({ email, status: "active" });
 
