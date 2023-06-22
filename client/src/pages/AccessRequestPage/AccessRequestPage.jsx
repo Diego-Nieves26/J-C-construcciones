@@ -69,7 +69,7 @@ export default function AccessRequestPage() {
   useEffect(() => {
     getAccessRequestData();
   }, []);
-
+console.log(accessRequestData)
   const getAccessRequestData = () => {
     instance
       .get("/pre-users/")
