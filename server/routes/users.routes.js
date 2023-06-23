@@ -7,6 +7,7 @@ const {
   getAllActiveUsers,
   updateRoleUser,
   disableUser,
+  checkToken,
 } = require("../controllers/users.controller");
 
 // Middlewares
@@ -14,7 +15,7 @@ const { createUserValidator } = require("../middlewares/validators.middleware");
 const { userExists } = require("../middlewares/users.middleware");
 const {
   protectSession,
-  protectUserAcoount,
+  userIsAdmin,
 } = require("../middlewares/auth.middleware");
 
 const usersRouter = express.Router();
@@ -29,13 +30,10 @@ usersRouter.use(protectSession);
 
 usersRouter.get("/", getAllActiveUsers);
 
-usersRouter.patch(
-  "/update/:id",
-  userExists,
-  protectUserAcoount,
-  updateRoleUser
-);
+usersRouter.get("/check-token", checkToken);
 
-usersRouter.delete("/delete/:id", userExists, protectUserAcoount, disableUser);
+usersRouter.patch("/update/:id", userExists, userIsAdmin, updateRoleUser);
+
+usersRouter.delete("/delete/:id", userExists, userIsAdmin, disableUser);
 
 module.exports = { usersRouter };

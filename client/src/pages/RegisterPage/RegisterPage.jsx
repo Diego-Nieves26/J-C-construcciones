@@ -1,10 +1,12 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // --------------------------------------------------------------------
-import { Link } from "react-router-dom";
+import Icons from "../../assets/icons";
 import { instance } from "../../axios/axiosConfig";
-import { CustomButton, LabelForm, Logo } from "../../components";
+import { CustomButton, InpMain, Logo } from "../../components";
 import { registerModel } from "../../models/auth.models";
 import { normalToast } from "../../utils/toastConfg";
 
@@ -14,6 +16,7 @@ import "./index.css";
 // --------------------------------------------------------------------
 
 export default function RegisterPage() {
+  const [showPass, setShowPass] = useState(false);
   const {
     register,
     handleSubmit,
@@ -23,12 +26,15 @@ export default function RegisterPage() {
   });
 
   const _handleRegister = (e) => {
-    toast("Cargando", normalToast);
+    toast("Cargando...", normalToast);
 
     instance
       .post("/pre-users/create", e)
       .then(({ data }) => {
-        toast(data.message, normalToast);
+        toast(
+          `${data.message}, espere a que su cuenta sea autorizada.`,
+          normalToast
+        );
       })
       .catch((err) => {
         console.log(err.response.data);
@@ -43,45 +49,48 @@ export default function RegisterPage() {
         className="form-login-register flex-center"
         onSubmit={handleSubmit(_handleRegister)}
       >
-        <span className="input-conatiner">
-          <LabelForm elementFor="name-inp" text="Nombre" />
-          <input
-            type="text"
-            name="name-inp"
-            id="name-inp"
-            className="input"
-            {...register("name", { required: true })}
-          />
-          <p className="error-message-inp">
-            {errors.name && "Este campo es requerido"}
-          </p>
-        </span>
-        <span className="input-conatiner">
-          <LabelForm elementFor="email-inp" text="Correo" />
-          <input
-            type="email"
-            name="email-inp"
-            id="email-inp"
-            className="input"
-            {...register("email", { required: true })}
-          />
-          <p className="error-message-inp">
-            {errors.email && "Este campo es requerido"}
-          </p>
-        </span>
-        <span className="input-conatiner">
-          <LabelForm elementFor="password-inp" text="Contraseña" />
-          <input
-            type="password"
-            name="password-inp"
-            id="password-inp"
-            className="input"
-            {...register("password", { required: true })}
-          />
-          <p className="error-message-inp">
-            {errors.password && "Este campo es requerido"}
-          </p>
-        </span>
+        <InpMain
+          label="Nombre"
+          typeInp="text"
+          idName="name"
+          register={register}
+          errors={errors}
+          validationObj={{ required: true, pattern: /^[A-Za-z]+$/i }}
+          nameValidation="pattern"
+          messageValidation="Solo se aceptan letras"
+        />
+        <InpMain
+          label="Correo"
+          typeInp="email"
+          idName="email"
+          register={register}
+          errors={errors}
+          validationObj={{
+            required: true,
+            pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+          }}
+          nameValidation="pattern"
+          messageValidation="Introduce un correo valido"
+        />
+        <InpMain
+          label="Contraseña"
+          typeInp={showPass ? "text" : "password"}
+          idName="password"
+          register={register}
+          errors={errors}
+          validationObj={{ required: true, minLength: 8 }}
+          nameValidation="minLength"
+          messageValidation="La contraseña debe tener minimo 8 caracteres"
+        >
+          <button
+            className="show-pass-btn"
+            type="button"
+            onClick={() => setShowPass(!showPass)}
+          >
+            {showPass ? Icons.HIDE_ICON : Icons.SHOW_ICON}
+          </button>
+        </InpMain>
+
         <CustomButton text="Registrarse" />
         <span className="span">
           Tines una cuenta <Link to="/login">Inicia secion</Link>

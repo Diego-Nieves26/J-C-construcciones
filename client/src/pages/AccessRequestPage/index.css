@@ -2,21 +2,8 @@
   padding: 2rem 20px;
 }
 
-.access-request-page .table-one tbody tr th:nth-child(3) select {
-  background: var(--btn-bg);
-  padding: 5px 2px;
-  color: var(--text-color-one);
-  border-radius: 3rem;
-  cursor: pointer;
-}
-
-.access-request-page .table-one tbody tr th:nth-child(3) select option {
-  background: var(--first-color);
-  color: var(--text-color-one);
-  cursor: pointer;
-}
-
-.access-request-page .table-one tbody tr th:nth-child(4) button {
+.access-request-page .table-one tbody tr th:nth-child(4) button,
+.access-request-page .table-one tbody tr th:nth-child(5) button {
   max-width: 200px;
   margin: auto;
 }

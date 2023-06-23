@@ -6,11 +6,13 @@ export const drawerData = [
   {
     label: "Paginas",
     icon: Icons.HOME_ICON,
+    roleAccess: ["admin", "organizer", "visualizer"],
     subLinks: [{ label: "Inicio", to: "/" }],
   },
   {
     label: "Organizar",
     icon: Icons.MAP_ICON,
+    roleAccess: ["admin", "organizer"],
     subLinks: [
       { label: "Rutas", to: "/organizer" },
       { label: "SUNAT", to: "test" },
@@ -19,6 +21,7 @@ export const drawerData = [
   {
     label: "Agregar datos",
     icon: Icons.WRITE_ICON,
+    roleAccess: ["admin"],
     subLinks: [
       {
         label: "Proveedores",
@@ -34,6 +37,7 @@ export const drawerData = [
   {
     label: "Eliminar datos",
     icon: Icons.TRASH_ICON,
+    roleAccess: ["admin"],
     subLinks: [
       {
         label: "Proveedores",
@@ -49,6 +53,7 @@ export const drawerData = [
   {
     label: "Cuentas",
     icon: Icons.USER_ICON,
+    roleAccess: ["admin"],
     subLinks: [
       {
         label: "Adiministrar cuentas",

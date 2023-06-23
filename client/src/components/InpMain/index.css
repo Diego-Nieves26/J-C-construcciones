@@ -1,0 +1,38 @@
+.input-conatiner .show-pass-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  color: var(--first-color);
+  font-size: var(--second-size);
+  cursor: pointer;
+}
+
+.input-conatiner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.input-conatiner .input[type="email"],
+.input-conatiner .input[type="password"],
+.input-conatiner .input[type="text"],
+.input-conatiner .input[type="number"] {
+  padding: 1rem 0.75rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  border-bottom: 2px solid var(--first-color);
+}
+
+.input-conatiner .input[type="email"]:focus,
+.input-conatiner .input[type="password"]:focus,
+.input-conatiner .input[type="text"]:focus,
+.input-conatiner .input[type="number"]:focus {
+  border: 2px solid var(--first-color);
+  border-radius: 0.5rem;
+}

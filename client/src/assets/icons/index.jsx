@@ -8,4 +8,6 @@ export default {
   WRITE_ICON: <i className="bx bxs-edit"></i>,
   SEARCH_ICON: <i className="bx bx-search"></i>,
   USER_ICON: <i className="bx bxs-user"></i>,
+  SHOW_ICON: <i className="bx bxs-show"></i>,
+  HIDE_ICON: <i className="bx bxs-hide"></i>,
 };

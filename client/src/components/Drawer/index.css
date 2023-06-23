@@ -3,6 +3,7 @@
   width: 100%;
   position: absolute;
   top: 0;
+  z-index: 100;
   transition: 300ms;
   padding: 3rem 25px;
   flex-direction: column;
@@ -16,6 +17,7 @@
   font-size: 3rem;
   margin: 20px;
   color: var(--first-color);
+  cursor: pointer;
 }
 
 .btn-close-drawer {
@@ -25,6 +27,7 @@
   font-size: 3rem;
   background: none;
   color: var(--first-color);
+  cursor: pointer;
 }
 
 .drawer-container > div {
@@ -86,6 +89,7 @@
 }
 
 .drawer-sublinks > li > h4 {
+  cursor: pointer;
   display: flex;
   align-items: center;
   padding: 0.5rem 0.5rem 0.5rem 1.25rem;

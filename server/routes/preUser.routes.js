@@ -20,6 +20,8 @@ const preUsersRouter = express.Router();
 
 preUsersRouter.post("/create", createPreUserValidator, createPreUser);
 
+preUsersRouter.use(protectSession);
+
 preUsersRouter.get("/", getAllPreUsers);
 
 preUsersRouter.delete("/delete/:id", preUserExists, deletePreUser);

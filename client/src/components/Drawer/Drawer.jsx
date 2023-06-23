@@ -5,13 +5,14 @@ import { useNavigate } from "react-router-dom";
 import Icons from "../../assets/icons";
 import { Logo } from "../../components";
 import { drawerData } from "../../data/drawer.data";
+import useDataContext from "../../hooks/useDataContext";
 
 // CSS
 import "./index.css";
 
 // --------------------------------------------------------------------
 
-const AcordeonDrawer = ({ elem }) => {
+const AcordeonDrawer = ({ elem, toggleDrawer }) => {
   const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
 
@@ -37,7 +38,14 @@ const AcordeonDrawer = ({ elem }) => {
       >
         {elem.subLinks.map((subLink, i) => (
           <li key={i + 1}>
-            <h4 onClick={() => navigate(subLink.to)}>{subLink.label}</h4>
+            <h4
+              onClick={() => {
+                toggleDrawer();
+                navigate(subLink.to);
+              }}
+            >
+              {subLink.label}
+            </h4>
           </li>
         ))}
       </ul>
@@ -46,6 +54,7 @@ const AcordeonDrawer = ({ elem }) => {
 };
 
 export default function Drawer() {
+  const { userCredentials } = useDataContext();
   const [showDrawer, setShowDrawer] = useState(false);
 
   const toggleDrawer = () => setShowDrawer(!showDrawer);
@@ -65,9 +74,17 @@ export default function Drawer() {
         </button>
         <Logo />
         <div>
-          {drawerData.map((elem, i) => (
-            <AcordeonDrawer elem={elem} key={i + 1} />
-          ))}
+          {drawerData.map((elem, i) => {
+            if (elem.roleAccess.includes(userCredentials.role)) {
+              return (
+                <AcordeonDrawer
+                  elem={elem}
+                  toggleDrawer={toggleDrawer}
+                  key={i + 1}
+                />
+              );
+            }
+          })}
         </div>
       </div>
     </>

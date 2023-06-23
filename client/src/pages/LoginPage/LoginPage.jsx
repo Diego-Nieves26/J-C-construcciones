@@ -1,19 +1,22 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // --------------------------------------------------------------------
-import { CustomButton, LabelForm, Logo } from "../../components";
+import Icons from "../../assets/icons";
+import { instance } from "../../axios/axiosConfig";
+import { CustomButton, InpMain, Logo } from "../../components";
 import { loginModel } from "../../models/auth.models";
+import { normalToast } from "../../utils/toastConfg";
 
 // CSS
-import { toast } from "react-toastify";
-import { instance } from "../../axios/axiosConfig";
-import { normalToast } from "../../utils/toastConfg";
 import "./index.css";
 
 // --------------------------------------------------------------------
 
 export default function LoginPage() {
+  const [showPass, setShowPass] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -25,7 +28,7 @@ export default function LoginPage() {
 
   const _handleLogin = (e) => {
     toast("Cargando", normalToast);
-console.log(e)
+
     instance
       .post("/users/login", e)
       .then(({ data }) => {
@@ -35,7 +38,7 @@ console.log(e)
       })
       .catch((err) => {
         console.log(err.response.data);
-        toast("Error", normalToast);
+        toast(`Error, ${err.response.data.message}`, normalToast);
       });
   };
 
@@ -46,32 +49,37 @@ console.log(e)
         className="form-login-register flex-center"
         onSubmit={handleSubmit(_handleLogin)}
       >
-        <span className="input-conatiner">
-          <LabelForm elementFor="email-inp" text="Correo" />
-          <input
-            type="email"
-            name="email-inp"
-            id="email-inp"
-            className="input"
-            {...register("email", { required: true })}
-          />
-          <p className="error-message-inp">
-            {errors.email && "Este campo es requerido"}
-          </p>
-        </span>
-        <span className="input-conatiner">
-          <LabelForm elementFor="password-inp" text="Contraseña" />
-          <input
-            type="password"
-            name="password-inp"
-            id="password-inp"
-            className="input"
-            {...register("password", { required: true })}
-          />
-          <p className="error-message-inp">
-            {errors.password && "Este campo es requerido"}
-          </p>
-        </span>
+        <InpMain
+          label="Correo"
+          typeInp="email"
+          idName="email"
+          register={register}
+          errors={errors}
+          validationObj={{
+            required: true,
+            pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+          }}
+          nameValidation="pattern"
+          messageValidation="Introduce un correo valido"
+        />
+        <InpMain
+          label="Contraseña"
+          typeInp={showPass ? "text" : "password"}
+          idName="password"
+          register={register}
+          errors={errors}
+          validationObj={{ required: true, minLength: 8 }}
+          nameValidation="minLength"
+          messageValidation="La contraseña debe tener minimo 8 caracteres"
+        >
+          <button
+            className="show-pass-btn"
+            type="button"
+            onClick={() => setShowPass(!showPass)}
+          >
+            {showPass ? Icons.HIDE_ICON : Icons.SHOW_ICON}
+          </button>
+        </InpMain>
         <span className="span">
           <a href="#">Recuperar contraseña</a>
         </span>

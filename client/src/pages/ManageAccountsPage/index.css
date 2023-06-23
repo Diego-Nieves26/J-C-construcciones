@@ -1,3 +1,10 @@
 .manage-accounts-page {
   padding: 2rem 20px;
 }
+
+.manage-accounts-page .table-one tbody tr th:nth-child(4) button {
+  background: none;
+  font-size: var(--second-size);
+  color: var(--first-color);
+  cursor: pointer;
+}

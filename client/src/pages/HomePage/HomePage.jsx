@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------
-import { HomeCardData, Search } from "../../components";
+import { HomeCardData } from "../../components";
 
 // CSS
 import "./index.css";
@@ -16,7 +16,6 @@ const cardData = [
 export default function HomePage() {
   return (
     <main className="home-page">
-      <Search />
       <ul>
         {cardData.map((item, i) => (
           <HomeCardData data={item} key={i + 1} />

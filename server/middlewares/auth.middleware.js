@@ -48,4 +48,14 @@ const protectUserAcoount = catchAsync(async (req, res, next) => {
   next();
 });
 
-module.exports = { protectSession, protectUserAcoount };
+const userIsAdmin = catchAsync(async (req, res, next) => {
+  const { sessionUser } = req;
+
+  if (!sessionUser.role === "admin") {
+    return next(new AppError("No cuentas con permisos de administrador", 403));
+  }
+
+  next();
+});
+
+module.exports = { protectSession, protectUserAcoount, userIsAdmin };

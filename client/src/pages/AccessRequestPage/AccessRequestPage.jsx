@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 
 // --------------------------------------------------------------------
 import { instance } from "../../axios/axiosConfig";
+import { getConfig } from "../../axios/getHeaders";
 import { Caption, CustomButton } from "../../components";
 import { normalToast } from "../../utils/toastConfg";
 
@@ -27,14 +28,22 @@ function LineTable({ item, updateData }) {
     instance
       .post("/users/signup", template)
       .then(() => {
-        instance.delete(`/pre-users/delete/${item.id}`).then(({ data }) => {
-          updateData();
-          toast(data.message, normalToast);
-        });
+        _handleDenyAccess();
       })
       .catch((err) => {
         console.log(err.response.data);
         toast("Error", normalToast);
+      });
+  };
+
+  const _handleDenyAccess = () => {
+    toast("Cargando...", normalToast);
+
+    instance
+      .delete(`/pre-users/delete/${item.id}`, getConfig())
+      .then(({ data }) => {
+        updateData();
+        toast(`${data.message}`, normalToast);
       });
   };
 
@@ -59,6 +68,13 @@ function LineTable({ item, updateData }) {
           task={_handleAllowAccess}
         />
       </th>
+      <th>
+        <CustomButton
+          text="Denegar acceso"
+          p="5px 2px"
+          task={_handleDenyAccess}
+        />
+      </th>
     </tr>
   );
 }
@@ -69,13 +85,11 @@ export default function AccessRequestPage() {
   useEffect(() => {
     getAccessRequestData();
   }, []);
-console.log(accessRequestData)
+
   const getAccessRequestData = () => {
     instance
-      .get("/pre-users/")
-      .then(({ data }) => 
-        setAccessRequestData(data.preUsers)
-           )
+      .get("/pre-users/", getConfig())
+      .then(({ data }) => setAccessRequestData(data.preUsers))
       .catch((err) => {
         console.log(err.response.data);
         toast("Error", normalToast);
@@ -92,11 +106,16 @@ console.log(accessRequestData)
             <th>Correo</th>
             <th>Asignar Rol</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          {accessRequestData.length <= 0 ? (
-            <p className="data-empty-message">Sin datos</p>
+          {accessRequestData.length === 0 ? (
+            <tr>
+              <th colSpan="5" className="data-empty-message">
+                Sin datos
+              </th>
+            </tr>
           ) : (
             accessRequestData.map((item) => (
               <LineTable

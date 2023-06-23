@@ -35,16 +35,14 @@ const createUser = catchAsync(async (req, res, next) => {
 
 const login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
-  console.log(email, password)
 
-  const user = await User.findOne({ email, status: "active" });
+  const user = await User.findOne({ where: { email } });
 
   if (!user) {
     return next(new AppError("Credenciales incorrectas", 404));
   }
-console.log(user)
+
   const isPasswordaValid = await bcrypt.compare(password, user.password);
-  console.log(isPasswordaValid);
 
   if (!isPasswordaValid) {
     return next(new AppError("Credenciales incorrectas", 404));
@@ -79,7 +77,7 @@ const updateRoleUser = catchAsync(async (req, res, next) => {
 
   await user.update({ role });
 
-  res.status(204).json({ status: "success", message: "¡Proceso exitoso!" });
+  res.status(204).json({ status: "success" });
 });
 
 const disableUser = catchAsync(async (req, res, next) => {
@@ -87,7 +85,13 @@ const disableUser = catchAsync(async (req, res, next) => {
 
   await user.update({ status: "disable" });
 
-  res.status(204).json({ status: "success", message: "¡Proceso exitoso!" });
+  res.status(204).json({ status: "success" });
+});
+
+const checkToken = catchAsync(async (req, res, next) => {
+  const { sessionUser } = req;
+
+  res.status(200).json({ user: sessionUser });
 });
 
 module.exports = {
@@ -96,4 +100,5 @@ module.exports = {
   getAllActiveUsers,
   updateRoleUser,
   disableUser,
+  checkToken,
 };
