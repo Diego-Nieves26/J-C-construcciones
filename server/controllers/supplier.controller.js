@@ -9,11 +9,12 @@ const { catchAsync } = require("../utils/catchAsync.util");
 dotenv.config({ path: "./config.env" });
 
 const createSupplier = catchAsync(async (req, res, next) => {
-  const { name, dni } = req.body;
+  const { name, pricePerTon, payPerTon } = req.body;
 
   const newSupplier = await Supplier.create({
     name,
-    dni,
+    pricePerTon,
+    payPerTon,
   });
 
   res.status(201).json({

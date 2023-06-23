@@ -7,6 +7,23 @@
   grid-template-columns: repeat(1, 1fr);
   max-width: initial;
   margin-top: 3rem;
+  gap: 2rem;
+}
+
+.input-money {
+  position: relative;
+}
+
+.input-money > span {
+  color: var(--first-color);
+  font-weight: 700;
+  position: absolute;
+  top: 1rem;
+  left: 0.75rem;
+}
+
+.input-money > .input[type="number"] {
+  padding: 1rem 0.75rem 1rem calc(0.75rem + 25px);
 }
 
 @media (min-width: 768px) {

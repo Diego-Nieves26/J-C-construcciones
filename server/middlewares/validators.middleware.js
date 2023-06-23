@@ -40,11 +40,22 @@ const createPreUserValidator = [
 
 const createSupplierValidator = [
   body("name").notEmpty().withMessage("Falta el campo Nombre"),
-  body("dni")
-    .isLength({ min: 8 })
-    .withMessage("El campo DNI debe tener 8 caracteres")
-    .isNumeric()
-    .withMessage("El DNI debe contener solo números"),
+  body("pricePerTon").notEmpty().withMessage("Falta el campo Precio por TN"),
+  body("payPerTon").notEmpty().withMessage("Falta el campo Pago por TN"),
+  checkResult,
+];
+
+const createUnitValidator = [
+  body("licensePlate").notEmpty().withMessage("Falta el campo Placa"),
+  body("typeOfVehicle")
+    .notEmpty()
+    .withMessage("Falta el campo Tipo de vehiculo"),
+  checkResult,
+];
+
+const createGasStationValidator = [
+  body("name").notEmpty().withMessage("Falta el campo Nombre"),
+  body("pricePerGl").notEmpty().withMessage("Falta el campo Precio por GL"),
   checkResult,
 ];
 
@@ -59,16 +70,11 @@ const createDriverValidator = [
   checkResult,
 ];
 
-const createCompanyValidator = [
-  body("name").notEmpty().withMessage("Falta el campo Nombre"),
-  body("ruc").notEmpty().withMessage("Falta el campo RUC"),
-  checkResult,
-];
-
 module.exports = {
   createUserValidator,
   createPreUserValidator,
   createSupplierValidator,
+  createUnitValidator,
+  createGasStationValidator,
   createDriverValidator,
-  createCompanyValidator,
 };

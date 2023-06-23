@@ -1,7 +1,7 @@
 const { db, DataTypes } = require("../utils/database.util");
 
-const Company = db.define(
-  "company",
+const GasStation = db.define(
+  "gasStation",
   {
     id: {
       primaryKey: true,
@@ -13,7 +13,7 @@ const Company = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    ruc: {
+    pricePerGl: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -24,9 +24,9 @@ const Company = db.define(
     },
   },
   {
-    tableName: "company",
+    tableName: "gasStation",
     timestamps: false,
   }
 );
 
-module.exports = { Company };
+module.exports = { GasStation };

@@ -1,7 +1,7 @@
 const { db, DataTypes } = require("../utils/database.util");
 
-const Supplier = db.define(
-  "supplier",
+const Unit = db.define(
+  "unit",
   {
     id: {
       primaryKey: true,
@@ -9,15 +9,11 @@ const Supplier = db.define(
       autoIncrement: true,
       allowNull: false,
     },
-    name: {
+    licensePlate: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    pricePerTon: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    payPerTon: {
+    typeOfVehicle: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -28,9 +24,9 @@ const Supplier = db.define(
     },
   },
   {
-    tableName: "supplier",
+    tableName: "unit",
     timestamps: false,
   }
 );
 
-module.exports = { Supplier };
+module.exports = { Unit };

@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { instance } from "../axios/axiosConfig";
+import { getConfig } from "../axios/getHeaders";
 // --------------------------------------------------------------------
 
 export const DataContext = createContext();
@@ -9,14 +10,12 @@ export const DataProvider = ({ children }) => {
 
   // VERIFY SESSION USER
   useEffect(() => {
-    instance
-      .get("/users/check-token", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("J&CToken")}`,
-        },
-      })
-      .then(({ data }) => setUserCredentials(data.user))
-      .catch(() => localStorage.removeItem("J&CToken"));
+    if (localStorage.getItem("J&CToken")) {
+      instance
+        .get("/users/check-token", getConfig())
+        .then(({ data }) => setUserCredentials(data.user))
+        .catch(() => localStorage.removeItem("J&CToken"));
+    }
   }, []);
 
   return (

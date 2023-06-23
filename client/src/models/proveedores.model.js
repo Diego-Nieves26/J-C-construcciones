@@ -1,4 +1,5 @@
 export const proveedorModel = {
   name: "",
-  dni: "",
+  pricePerTon: "",
+  payPerTon: "",
 };

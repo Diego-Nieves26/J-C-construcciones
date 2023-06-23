@@ -1,29 +1,24 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // --------------------------------------------------------------------
 import Icons from "../../assets/icons";
 import { instance } from "../../axios/axiosConfig";
-import { Caption } from "../../components";
+import { getConfig } from "../../axios/getHeaders";
+import { Caption, Search } from "../../components";
 import { normalToast } from "../../utils/toastConfg";
 
 // CSS
-import { useEffect, useState } from "react";
 import "./index.css";
 
 // --------------------------------------------------------------------
 
 const getData = async (endpoint) => {
-  let res = await instance
-    .get(endpoint, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("J&CToken")}`,
-      },
-    })
-    .catch((err) => {
-      console.log(err.response.data);
-      toast("Error", normalToast);
-    });
+  let res = await instance.get(endpoint, getConfig()).catch((err) => {
+    console.log(err.response.data);
+    toast("Error", normalToast);
+  });
 
   return res.data;
 };
@@ -46,7 +41,6 @@ function ProveedoresTableDelete() {
       <thead>
         <tr>
           <th>Nombre</th>
-          <th>DNI</th>
           <th></th>
         </tr>
       </thead>
@@ -54,7 +48,6 @@ function ProveedoresTableDelete() {
         {suppliersData?.map((item, i) => (
           <tr key={i + 1}>
             <th>{item.name}</th>
-            <th>{item.dni}</th>
             <th>{Icons.TRASH_ICON}</th>
           </tr>
         ))}
@@ -63,35 +56,31 @@ function ProveedoresTableDelete() {
   );
 }
 
-function ConductoresTableDelete() {
-  const [driversData, setDriversData] = useState([]);
+function UnidadesTableDelete() {
+  const [unitsData, setUnitsData] = useState([]);
 
   useEffect(() => {
-    getDrivers();
+    getUnits();
   }, []);
 
-  const getDrivers = async () => {
-    const response = await getData("/drivers/");
+  const getUnits = async () => {
+    const response = await getData("/units/");
 
-    setDriversData(response.drivers);
+    setUnitsData(response.units);
   };
 
   return (
     <table className="table-one">
       <thead>
         <tr>
-          <th>Nombre</th>
-          <th>DNI</th>
           <th>Placa</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        {driversData?.map((item, i) => (
+        {unitsData?.map((item, i) => (
           <tr key={i + 1}>
-            <th>{item.name}</th>
-            <th>{item.dni}</th>
-            <th>{item.placa}</th>
+            <th>{item.licensePlate}</th>
             <th>{Icons.TRASH_ICON}</th>
           </tr>
         ))}
@@ -100,17 +89,17 @@ function ConductoresTableDelete() {
   );
 }
 
-function EmpresasTableDelete() {
-  const [companiesData, setCompaniesData] = useState([]);
+function GrifosTableDelete() {
+  const [gasStationsData, setGasStationsData] = useState([]);
 
   useEffect(() => {
-    getCompanies();
+    getGasStations();
   }, []);
 
-  const getCompanies = async () => {
-    const response = await getData("/companies/");
+  const getGasStations = async () => {
+    const response = await getData("/gas-stations/");
 
-    setCompaniesData(response.companies);
+    setGasStationsData(response.gasStations);
   };
 
   return (
@@ -118,15 +107,13 @@ function EmpresasTableDelete() {
       <thead>
         <tr>
           <th>Nombre</th>
-          <th>RUC</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        {companiesData?.map((item, i) => (
+        {gasStationsData?.map((item, i) => (
           <tr key={i + 1}>
             <th>{item.name}</th>
-            <th>{item.ruc}</th>
             <th>{Icons.TRASH_ICON}</th>
           </tr>
         ))}
@@ -141,12 +128,13 @@ export default function DeleteDataPage() {
   return (
     <main className="delete-data-page">
       <Caption text={`Eliminar datos: ${type.toUpperCase()}`} />
+      <Search />
       {type === "proveedores" ? (
         <ProveedoresTableDelete />
-      ) : type === "conductores" ? (
-        <ConductoresTableDelete />
+      ) : type === "grifos" ? (
+        <GrifosTableDelete />
       ) : (
-        type === "empresa" && <EmpresasTableDelete />
+        type === "unidades" && <UnidadesTableDelete />
       )}
     </main>
   );

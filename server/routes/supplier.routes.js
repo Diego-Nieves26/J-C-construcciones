@@ -12,7 +12,10 @@ const {
   createSupplierValidator,
 } = require("../middlewares/validators.middleware");
 const { supplierExists } = require("../middlewares/supplier.middleware");
-const { protectSession } = require("../middlewares/auth.middleware");
+const {
+  protectSession,
+  userIsAdmin,
+} = require("../middlewares/auth.middleware");
 
 const supplierRouter = express.Router();
 
@@ -20,10 +23,20 @@ const supplierRouter = express.Router();
 
 supplierRouter.use(protectSession);
 
-supplierRouter.post("/create", createSupplierValidator, createSupplier);
+supplierRouter.post(
+  "/create",
+  userIsAdmin,
+  createSupplierValidator,
+  createSupplier
+);
 
 supplierRouter.get("/", getAllActiveSuppliers);
 
-supplierRouter.delete("/delete/:id", supplierExists, disableSupplier);
+supplierRouter.delete(
+  "/delete/:id",
+  userIsAdmin,
+  supplierExists,
+  disableSupplier
+);
 
 module.exports = { supplierRouter };

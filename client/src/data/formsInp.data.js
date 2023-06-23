@@ -1,6 +1,7 @@
 import { conductorModel } from "../models/conductores.model";
-import { empresaModel } from "../models/empresa.model";
+import { grifosModel } from "../models/grifos.models";
 import { proveedorModel } from "../models/proveedores.model";
+import { unidadModel } from "../models/unidad.models";
 
 export const formInpCreateData = {
   proveedores: {
@@ -8,14 +9,29 @@ export const formInpCreateData = {
       {
         label: "Nombre",
         name: "name",
-        id: "email-inp",
+        id: "name-inp",
         type: "text",
+        typeCamp: "text",
+        formatInp: {},
+        validationInp: {},
       },
       {
-        label: "DNI",
-        name: "dni",
-        id: "dni-inp",
+        label: "Precio por TN",
+        name: "pricePerTon",
+        id: "pricePerTon-inp",
         type: "number",
+        typeCamp: "money",
+        formatInp: { step: "0.01", min: "0" },
+        validationInp: {},
+      },
+      {
+        label: "Pago por TN JC&R",
+        name: "payPerTon",
+        id: "payPerTon-inp",
+        type: "number",
+        typeCamp: "money",
+        formatInp: { step: "0.01", min: "0" },
+        validationInp: {},
       },
     ],
     link: "/suppliers/",
@@ -24,43 +40,64 @@ export const formInpCreateData = {
   conductores: {
     fildsName: [
       {
-        label: "Nombre",
-        name: "name",
-        id: "email-inp",
-        type: "text",
-      },
-      {
         label: "DNI",
         name: "dni",
         id: "dni-inp",
-        type: "number",
-      },
-      {
-        label: "Placa",
-        name: "placa",
-        id: "placa-inp",
         type: "text",
+        typeCamp: "text",
+        formatInp: { inputmode: "numeric", pattern: !/^\d+$/ },
+        validationInp: { pattern: /^[0-9]{8}$/ },
       },
     ],
     link: "/drivers/",
     model: conductorModel,
   },
-  empresa: {
+  unidades: {
+    fildsName: [
+      {
+        label: "Placa",
+        name: "licensePlate",
+        id: "licensePlate-inp",
+        type: "text",
+        typeCamp: "text",
+        formatInp: {},
+        validationInp: { maxLength: 7, minLength: 7, pattern: /-/i },
+      },
+      {
+        label: "Tipo de vehiculo",
+        name: "typeOfVehicle",
+        id: "typeOfVehicle-inp",
+        type: "text",
+        typeCamp: "text",
+        formatInp: {},
+        validationInp: {},
+      },
+    ],
+    link: "/units/",
+    model: unidadModel,
+  },
+  grifos: {
     fildsName: [
       {
         label: "Nombre",
         name: "name",
-        id: "email-inp",
+        id: "name-inp",
         type: "text",
+        typeCamp: "text",
+        formatInp: {},
+        validationInp: {},
       },
       {
-        label: "RUC",
-        name: "ruc",
-        id: "ruc-inp",
+        label: "Precio por GL",
+        name: "pricePerGl",
+        id: "pricePerGl-inp",
         type: "number",
+        typeCamp: "money",
+        formatInp: { step: "0.01", min: "0" },
+        validationInp: {},
       },
     ],
-    link: "/companies/",
-    model: empresaModel,
+    link: "/gas-stations/",
+    model: grifosModel,
   },
 };

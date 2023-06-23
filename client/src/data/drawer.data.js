@@ -27,11 +27,18 @@ export const drawerData = [
         label: "Proveedores",
         to: "/add-data/proveedores",
       },
+      // {
+      //   label: "Conductores",
+      //   to: "/add-data/conductores",
+      // },
       {
-        label: "Conductores",
-        to: "/add-data/conductores",
+        label: "Unidades",
+        to: "/add-data/unidades",
       },
-      { label: "Empresa", to: "/add-data/empresa" },
+      {
+        label: "Grifos",
+        to: "/add-data/grifos",
+      },
     ],
   },
   {
@@ -43,11 +50,18 @@ export const drawerData = [
         label: "Proveedores",
         to: "/delete-data/proveedores",
       },
+      // {
+      //   label: "Conductores",
+      //   to: "/delete-data/conductores",
+      // },
       {
-        label: "Conductores",
-        to: "/delete-data/conductores",
+        label: "Unidades",
+        to: "/delete-data/unidades",
       },
-      { label: "Empresa", to: "/delete-data/empresa" },
+      {
+        label: "Grifos",
+        to: "/delete-data/grifos",
+      },
     ],
   },
   {

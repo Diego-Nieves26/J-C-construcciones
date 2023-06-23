@@ -9,7 +9,8 @@ const { usersRouter } = require("./routes/users.routes");
 const { preUsersRouter } = require("./routes/preUser.routes");
 const { supplierRouter } = require("./routes/supplier.routes");
 const { driverRouter } = require("./routes/driver.routes");
-const { companyRouter } = require("./routes/company.routes");
+const { unitRouter } = require("./routes/unit.routes");
+const { gasStationRouter } = require("./routes/gasStation.routes");
 
 // Global err controller
 const { globalErrorHandler } = require("./controllers/error.controller");
@@ -43,7 +44,8 @@ app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/pre-users", preUsersRouter);
 app.use("/api/v1/suppliers", supplierRouter);
 app.use("/api/v1/drivers", driverRouter);
-app.use("/api/v1/companies", companyRouter);
+app.use("/api/v1/units", unitRouter);
+app.use("/api/v1/gas-stations", gasStationRouter);
 
 // Handle incoming unknown routes to the server
 app.all("*", (req, res, next) => {
