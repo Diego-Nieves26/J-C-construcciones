@@ -92,6 +92,10 @@
   background-color: var(--first-color);
 }
 
+.table-one .table-line-border th {
+  border: 1px dashed #fff;
+}
+
 .table-one thead th {
   font-size: var(--second-size);
   color: var(--text-color-one);

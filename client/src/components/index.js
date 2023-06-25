@@ -1,11 +1,11 @@
 export { default as Caption } from "./Caption/Caption";
 export { default as CustomButton } from "./CustomButton/CustomButton";
 export { default as Drawer } from "./Drawer/Drawer";
+export { default as FormCreateViaje } from "./FormCreateViaje/FormCreateViaje";
 export { default as HomeCardData } from "./HomeCardData/HomeCardData";
 export { default as InpMain } from "./InpMain/InpMain";
 export { default as LabelForm } from "./LabelForm/LabelForm";
 export { default as Loader } from "./Loader/Loader";
 export { default as Logo } from "./Logo/Logo";
 export { default as MessageErrInp } from "./MessageErrInp/MessageErrInp";
-export { default as ModalCreateRuta } from "./ModalCreateRuta/ModalCreateRuta";
 export { default as Search } from "./Search/Search";

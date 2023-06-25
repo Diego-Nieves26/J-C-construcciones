@@ -10,4 +10,5 @@ export default {
   USER_ICON: <i className="bx bxs-user"></i>,
   SHOW_ICON: <i className="bx bxs-show"></i>,
   HIDE_ICON: <i className="bx bxs-hide"></i>,
+  ERASER_ICON: <i className="bx bxs-eraser"></i>,
 };

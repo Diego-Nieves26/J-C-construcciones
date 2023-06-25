@@ -3,12 +3,28 @@
 }
 
 .organizer-page > div {
+  width: 100%;
+  justify-content: flex-end;
   display: flex;
   gap: 2rem;
-  justify-content: flex-end;
   margin-top: 2rem;
 }
 
 .organizer-page > div button {
   width: auto;
+}
+
+.table-viajes-container {
+  overflow-x: scroll;
+}
+
+.table-viajes-container thead th {
+  white-space: nowrap;
+  padding: 10px;
+}
+
+.table-viajes-container tbody th {
+  white-space: nowrap;
+  border: 1px dashed var(--first-color);
+  padding: 10px;
 }

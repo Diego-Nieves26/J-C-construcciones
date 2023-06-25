@@ -13,10 +13,7 @@ export const drawerData = [
     label: "Organizar",
     icon: Icons.MAP_ICON,
     roleAccess: ["admin", "organizer"],
-    subLinks: [
-      { label: "Rutas", to: "/organizer" },
-      { label: "SUNAT", to: "test" },
-    ],
+    subLinks: [{ label: "Viajes", to: "/organizer" }],
   },
   {
     label: "Agregar datos",
@@ -38,6 +35,25 @@ export const drawerData = [
       {
         label: "Grifos",
         to: "/add-data/grifos",
+      },
+    ],
+  },
+  {
+    label: "Actualizar datos",
+    icon: Icons.ERASER_ICON,
+    roleAccess: ["admin"],
+    subLinks: [
+      {
+        label: "Proveedores",
+        to: "/update-data/proveedores",
+      },
+      {
+        label: "Unidades",
+        to: "/update-data/unidades",
+      },
+      {
+        label: "Grifos",
+        to: "/update-data/grifos",
       },
     ],
   },

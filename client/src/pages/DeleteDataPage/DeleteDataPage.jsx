@@ -15,7 +15,7 @@ import "./index.css";
 // --------------------------------------------------------------------
 
 const getData = async (endpoint) => {
-  let res = await instance.get(endpoint, getConfig()).catch((err) => {
+  let res = await instance.get(`${endpoint}/`, getConfig()).catch((err) => {
     console.log(err.response.data);
     toast("Error", normalToast);
   });
@@ -23,102 +23,67 @@ const getData = async (endpoint) => {
   return res.data;
 };
 
-function ProveedoresTableDelete() {
-  const [suppliersData, setSuppliersData] = useState([]);
+const deleteItem = async (endpoint, updateData) => {
+  instance
+    .delete(endpoint, getConfig())
+    .then(() => {
+      updateData();
+      toast("Se elimino el item exitosamente", normalToast);
+    })
+    .catch((err) => {
+      console.log(err.response.data);
+      toast("Error", normalToast);
+    });
+};
 
-  useEffect(() => {
-    getSuppliers();
-  }, []);
+function TableDelete({ point, label, atr, idItem }) {
+  const [data, setData] = useState([]);
 
-  const getSuppliers = async () => {
-    const response = await getData("/suppliers/");
+  const getInformation = async () => {
+    const response = await getData(point);
 
-    setSuppliersData(response.suppliers);
+    setData(response[idItem]);
   };
 
-  return (
-    <table className="table-one">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {suppliersData?.map((item, i) => (
-          <tr key={i + 1}>
-            <th>{item.name}</th>
-            <th>{Icons.TRASH_ICON}</th>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-}
-
-function UnidadesTableDelete() {
-  const [unitsData, setUnitsData] = useState([]);
-
   useEffect(() => {
-    getUnits();
-  }, []);
-
-  const getUnits = async () => {
-    const response = await getData("/units/");
-
-    setUnitsData(response.units);
-  };
+    getInformation();
+  }, [point, idItem]);
 
   return (
-    <table className="table-one">
-      <thead>
-        <tr>
-          <th>Placa</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {unitsData?.map((item, i) => (
-          <tr key={i + 1}>
-            <th>{item.licensePlate}</th>
-            <th>{Icons.TRASH_ICON}</th>
+    <>
+      <Search
+        placeholder={`${label.toUpperCase()}`}
+        changeData={setData}
+        point={point}
+        filterBy={atr}
+        idItem={idItem}
+      />
+      <table className="table-one">
+        <thead>
+          <tr>
+            <th>{label}</th>
+            <th></th>
           </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-}
-
-function GrifosTableDelete() {
-  const [gasStationsData, setGasStationsData] = useState([]);
-
-  useEffect(() => {
-    getGasStations();
-  }, []);
-
-  const getGasStations = async () => {
-    const response = await getData("/gas-stations/");
-
-    setGasStationsData(response.gasStations);
-  };
-
-  return (
-    <table className="table-one">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {gasStationsData?.map((item, i) => (
-          <tr key={i + 1}>
-            <th>{item.name}</th>
-            <th>{Icons.TRASH_ICON}</th>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {data?.map((item) => (
+            <tr key={item.id}>
+              <th>{item[atr]}</th>
+              <th className="delete-col">
+                <button
+                  className="flex-center"
+                  onClick={() =>
+                    deleteItem(`${point}/delete/${item.id}`, getInformation)
+                  }
+                >
+                  {Icons.TRASH_ICON}
+                </button>
+              </th>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
   );
 }
 
@@ -128,13 +93,29 @@ export default function DeleteDataPage() {
   return (
     <main className="delete-data-page">
       <Caption text={`Eliminar datos: ${type.toUpperCase()}`} />
-      <Search />
       {type === "proveedores" ? (
-        <ProveedoresTableDelete />
+        <TableDelete
+          point="/suppliers"
+          label="Nombre"
+          atr="name"
+          idItem="suppliers"
+        />
       ) : type === "grifos" ? (
-        <GrifosTableDelete />
+        <TableDelete
+          point="/gas-stations"
+          label="Nombre"
+          atr="name"
+          idItem="gasStations"
+        />
       ) : (
-        type === "unidades" && <UnidadesTableDelete />
+        type === "unidades" && (
+          <TableDelete
+            point="/units"
+            label="Placa"
+            atr="licensePlate"
+            idItem="units"
+          />
+        )
       )}
     </main>
   );

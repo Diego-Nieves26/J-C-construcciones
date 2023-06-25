@@ -11,6 +11,7 @@ const { supplierRouter } = require("./routes/supplier.routes");
 const { driverRouter } = require("./routes/driver.routes");
 const { unitRouter } = require("./routes/unit.routes");
 const { gasStationRouter } = require("./routes/gasStation.routes");
+const { searchRouter } = require("./routes/search.routes");
 
 // Global err controller
 const { globalErrorHandler } = require("./controllers/error.controller");
@@ -46,6 +47,7 @@ app.use("/api/v1/suppliers", supplierRouter);
 app.use("/api/v1/drivers", driverRouter);
 app.use("/api/v1/units", unitRouter);
 app.use("/api/v1/gas-stations", gasStationRouter);
+app.use("/api/v1/search", searchRouter);
 
 // Handle incoming unknown routes to the server
 app.all("*", (req, res, next) => {

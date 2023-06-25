@@ -1,0 +1,9 @@
+.line-create-viaje > th select {
+  background: #fff !important;
+  color: var(--text-color-two) !important;
+}
+
+.line-create-viaje > th select option {
+  background: var(--first-color);
+  color: var(--text-color-one);
+}

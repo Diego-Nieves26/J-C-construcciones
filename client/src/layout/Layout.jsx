@@ -19,6 +19,9 @@ const DeleteDataPage = lazy(() =>
   import("../pages/DeleteDataPage/DeleteDataPage")
 );
 const AddDataPage = lazy(() => import("../pages/AddDataPage/AddDataPage"));
+const UpdateDataPage = lazy(() =>
+  import("../pages/UpdateDataPage/UpdateDataPage")
+);
 const OrganizerPage = lazy(() =>
   import("../pages/OrganizerPage/OrganizerPage")
 );
@@ -48,6 +51,7 @@ export default function Layout() {
           <Route path="/manage-accounts" element={<ManageAccountsPage />} />
           <Route path="/delete-data/:type" element={<DeleteDataPage />} />
           <Route path="/add-data/:type" element={<AddDataPage />} />
+          <Route path="/update-data/:type" element={<UpdateDataPage />} />
           <Route path="/organizer" element={<OrganizerPage />} />
         </Route>
       </Routes>
